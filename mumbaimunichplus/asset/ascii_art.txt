@@ -1,0 +1,47 @@
+import os
+
+# Function to clear the screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Function to display ASCII art from a file
+def display_ascii_art(file_path):
+    with open(file_path, "r") as file:
+        ascii_art = file.read()
+        print(ascii_art)
+
+# Function to display the main menu
+def main_menu(user_manager, stock_manager, sales_analytics, canteen_manager):
+    clear_screen()
+    
+    # Display ASCII art from the "assets" folder
+    ascii_art_file = os.path.join("assets", "ascii_art.txt")
+    if os.path.exists(ascii_art_file):
+        display_ascii_art(ascii_art_file)
+    
+    print("Welcome to Mumbai Munchies - Canteen Management System")
+    print("-----------------------------------------")
+    print("1. View Menu")
+    print("2. Place Order")
+    print("3. Check Out")
+    print("4. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        display_menu(stock_manager)
+    elif choice == "2":
+        username = input("Enter your username: ")
+        if user_manager.authenticate_user(username):
+            place_order(username, stock_manager, canteen_manager)
+        else:
+            print("Authentication failed. Please enter valid credentials.")
+    elif choice == "3":
+        # Implement checkout functionality here
+        pass
+    elif choice == "4":
+        exit()
+    else:
+        print("Invalid choice. Please enter a valid option.")
+
+# Rest of the menu.py code...
+
